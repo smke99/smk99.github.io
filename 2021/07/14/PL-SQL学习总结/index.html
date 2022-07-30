@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>PL/SQL基础 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="SQL只是访问、操作数据库的语言，而并不是一种程序设计语言，因此不能用于程序开发。 PL&#x2F;SQL (Procedural Language&#x2F;SQL)是Oracle在标准SQL上进行过程性扩展后形成的程序设计语言，是 Oracle数据库特有的、支持应用开发的语言。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PL&#x2F;SQL基础">
+<meta property="og:url" content="http://example.com/2021/07/14/PL-SQL%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="SQL只是访问、操作数据库的语言，而并不是一种程序设计语言，因此不能用于程序开发。 PL&#x2F;SQL (Procedural Language&#x2F;SQL)是Oracle在标准SQL上进行过程性扩展后形成的程序设计语言，是 Oracle数据库特有的、支持应用开发的语言。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/PL-SQL%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/1.png">
+<meta property="article:published_time" content="2021-07-14T01:02:58.000Z">
+<meta property="article:modified_time" content="2021-07-15T03:18:39.535Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Oracle">
+<meta property="article:tag" content="PL&#x2F;SQL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/PL-SQL%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-PL-SQL学习总结" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/07/14/PL-SQL%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" class="article-date">
+  <time datetime="2021-07-14T01:02:58.000Z" itemprop="datePublished">2021-07-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      PL/SQL基础
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>SQL只是访问、操作数据库的语言，而并不是一种程序设计语言，因此不能用于程序开发。</p>
+<p>PL/SQL (Procedural Language/SQL)是Oracle在标准SQL上进行过程性扩展后形成的程序设计语言，是 Oracle数据库特有的、支持应用开发的语言。</p>
+<span id="more"></span>
+
+<p>参考资料：</p>
+<ul>
+<li>Oracle 12c从入门到精通</li>
+<li>Oracle 11g 数据库基础教程课件</li>
+</ul>
+<h1 id="基本结构"><a href="#基本结构" class="headerlink" title="基本结构"></a>基本结构</h1><p>PL/SQL是一种模块式结构的语言，其大体结构如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DECLARE</span></span><br><span class="line">  <span class="comment">--声明一些变量、常量、用户定义的数据类型以及游标等[可选]</span></span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">  <span class="comment">--主程序体，在这可以加入各种合法语句[必须]</span></span><br><span class="line">EXCEPTION</span><br><span class="line">  <span class="comment">--异常处理程序,当程序中出现错误时执行这一部分[可选]</span></span><br><span class="line"><span class="keyword">END</span>;  <span class="comment">--主体程序结束</span></span><br></pre></td></tr></table></figure>
+
+<p>💡例如：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DECLARE</span></span><br><span class="line">  v_fname VARCHAR2(<span class="number">10</span>);</span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">  <span class="keyword">SELECT</span> first_name <span class="keyword">INTO</span> v_fname <span class="keyword">FROM</span> employees</span><br><span class="line">  <span class="keyword">WHERE</span> employee_id<span class="operator">=</span><span class="number">109</span>;</span><br><span class="line">  DBMS_OUTPUT.PUT_LINE(v_fname);</span><br><span class="line">EXCEPTION</span><br><span class="line">  <span class="keyword">WHEN</span> NO_DATA_FOUND <span class="keyword">THEN</span></span><br><span class="line">  DBMS_OUTPUT.PUT_LINE(<span class="string">&#x27;There is not such an employee&#x27;</span>);</span><br><span class="line"><span class="keyword">END</span>; </span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">  若要在SQL*Plus环境中看到DBMS_OUTPUT.PUT_LINE方法的输出结果，必须将环境变量SERVEROUTPUT设置为ON。</span></span><br><span class="line"><span class="comment">  SET SERVEROUTPUT ON</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h1><p><strong>匿名块：</strong>匿名块是指动态生成，只能执行一次的块，不能由其他应用程序调用。</p>
+<p><strong>命名块：</strong>命名块是指一次编译可多次执行的<strong>PL/SQL</strong>程序，包括函数、存储过程、包、触发器等。它们编译后放在服务器中，由应用程序或系统在特定条件下调用执行。</p>
+<h1 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h1><p><img src="/PL-SQL%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/1.png"></p>
+<h2 id="数字类型"><a href="#数字类型" class="headerlink" title="数字类型"></a>数字类型</h2><p>存储整数或实数。包含<code>NUMBER、PLS_INTEGER、BINARY_INTEGER</code></p>
+<p><code>NUMBER</code> 可存储整数或浮点数</p>
+<blockquote>
+<p>NUMBER(P,S)是一种格式化的数字，其中P是精度，S是刻度范围。精度是数值中所有有效数字的个数，而刻度范围是小数点右边数字位的个数。精度和刻度范围都是可选的，但是如果指定了刻度范围，那么也必须指定精度。</p>
+</blockquote>
+<p><code>PLS_INTEGER、BINARY_INTEGER</code>只存储整数</p>
+<h2 id="字符类型"><a href="#字符类型" class="headerlink" title="字符类型"></a>字符类型</h2><p>存储字符串或字符数据。包括<code>VARCHAR2、CHAR、LONG</code></p>
+<h2 id="日期类型"><a href="#日期类型" class="headerlink" title="日期类型"></a>日期类型</h2><p>存储日期和时间信息。<code>DATE</code></p>
+<h2 id="布尔类型"><a href="#布尔类型" class="headerlink" title="布尔类型"></a>布尔类型</h2><p><code>BOOLEAN</code>，控制程序流程。值可以是<code>TRUE、FALSE、NULL</code></p>
+<h2 id="记录类型"><a href="#记录类型" class="headerlink" title="记录类型"></a>记录类型</h2><p>类似于结构体，例如</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">TYPE Typ_ERR <span class="keyword">IS</span> RECORD(</span><br><span class="line">	Err_No VARCHAR2(<span class="number">20</span>),Err_Msg VARCHAR2(<span class="number">1000</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h2 id="TYPE与-ROWTYPE"><a href="#TYPE与-ROWTYPE" class="headerlink" title="%TYPE与%ROWTYPE"></a>%TYPE与%ROWTYPE</h2><p>如果要定义一个类型与某个变量的数据类型或数据库表中某个列的数据类型一致（不知道该变量或列的数据类型）的变量，可以利用**%TYPE**来实现。</p>
+<p>如果要定义一个与数据库中某个表结构一致的记录类型的变量，可以使用**%ROWTYPE**来实现。</p>
+<blockquote>
+<p>变量的类型随参照的变量类型、数据库表列类型、表结构的变化而变化；</p>
+</blockquote>
+<p>💡例如</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DECLARE</span></span><br><span class="line">  v_sal employees.salary<span class="operator">%</span>TYPE;</span><br><span class="line">  v_emp employees<span class="operator">%</span>ROWTYPE;</span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">  <span class="keyword">SELECT</span> salary <span class="keyword">INTO</span> v_sal <span class="keyword">FROM</span> employees </span><br><span class="line">  <span class="keyword">WHERE</span> employee_id<span class="operator">=</span><span class="number">109</span>;</span><br><span class="line">  <span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">INTO</span> v_emp <span class="keyword">FROM</span> employees </span><br><span class="line">  <span class="keyword">WHERE</span> employee_id<span class="operator">=</span><span class="number">150</span>;</span><br><span class="line">  DBMS_OUTPUT.PUT_LINE(v_sal);</span><br><span class="line">  DBMS_OUTPUT.PUT_LINE(v_emp.first_name<span class="operator">||</span></span><br><span class="line">  v_emp.salary);</span><br><span class="line"><span class="keyword">END</span>; </span><br></pre></td></tr></table></figure>
+
+<h1 id="变量与常量"><a href="#变量与常量" class="headerlink" title="变量与常量"></a>变量与常量</h1><h2 id="变量命名规范"><a href="#变量命名规范" class="headerlink" title="变量命名规范"></a>变量命名规范</h2><ul>
+<li>字符串：V_</li>
+<li>日期：D_</li>
+<li>数值：N_</li>
+<li>表：T_</li>
+<li>布尔：B</li>
+<li>游标：CUR_</li>
+<li>记录类型：R_</li>
+</ul>
+<h2 id="定义格式"><a href="#定义格式" class="headerlink" title="定义格式"></a>定义格式</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">variable_name [CONSTANT] datatype [<span class="keyword">NOT</span> <span class="keyword">NULL</span>] [<span class="keyword">DEFAULT</span><span class="operator">|</span>:<span class="operator">=</span>expression];</span><br></pre></td></tr></table></figure>
+
+<p>📌说明：</p>
+<blockquote>
+<p>每行只能定义一个变量；</p>
+<p>如果加上关键字CONSTANT，则表示所定义的是一个常量，必须为它赋初值；</p>
+<p>如果定义变量时使用了NOT NULL关键字，则必须为变量赋初值；</p>
+<p>如果变量没有赋初值，则默认为NULL；</p>
+<p>使用DEFAULT或“:=”运算符为变量初始化。</p>
+</blockquote>
+<p>💡例如：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DECLARE</span></span><br><span class="line">  v1 NUMBER(<span class="number">4</span>);</span><br><span class="line">  v2 NUMBER(<span class="number">4</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> :<span class="operator">=</span><span class="number">10</span>;</span><br><span class="line">  v3 CONSTANT NUMBER(<span class="number">4</span>) <span class="keyword">DEFAULT</span> <span class="number">100</span>;</span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">  IF v1 <span class="keyword">IS</span> <span class="keyword">NULL</span> <span class="keyword">THEN</span> </span><br><span class="line">     DBMS_OUTPUT.PUT_LINE(<span class="string">&#x27;V1 IS NULL! &#x27;</span>);</span><br><span class="line">  <span class="keyword">END</span> IF;</span><br><span class="line">  DBMS_OUTPUT.PUT_LINE(v2<span class="operator">||</span><span class="string">&#x27; &#x27;</span><span class="operator">||</span>v3);</span><br><span class="line"><span class="keyword">END</span>; </span><br></pre></td></tr></table></figure>
+
+<h2 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h2><p>变量的作用域是指变量的有效作用范围，从变量声明开始，直到块结束。</p>
+<p>如果PL/SQL块相互嵌套，则在内部块中声明的变量是局部的，只能在内部块中引用，而在外部块中声明的变量是全局的，既可以在外部块中引用，也可以在内部块中引用。</p>
+<p>如果内部块与外部块中定义了同名变量，则在内部块中引用外部块的全局变量时需要使用外部块名进行标识。 </p>
+<h1 id="控制结构"><a href="#控制结构" class="headerlink" title="控制结构"></a>控制结构</h1><h2 id="IF语句"><a href="#IF语句" class="headerlink" title="IF语句"></a>IF语句</h2><p>基本语法</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">IF condition1 <span class="keyword">THEN</span> statements1;</span><br><span class="line">[ELSIF condition2 <span class="keyword">THEN</span> statements2;]</span><br><span class="line">……</span><br><span class="line">[<span class="keyword">ELSE</span> else_statements];</span><br><span class="line"><span class="keyword">END</span> IF; </span><br><span class="line"></span><br><span class="line"><span class="comment">/*条件是一个布尔型变量或表达式，取值只能是TRUE，FALSE，NULL。*/</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>💡例如：输入一个员工号，修改该员工的工资，如果该员工为10号部门，则工资增加100；若为20号部门，则工资增加150；若为30号部门，则工资增加200；否则增加300。 </p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DECLARE</span></span><br><span class="line">  v_deptno employees.department_id<span class="operator">%</span>type;</span><br><span class="line">  v_increment NUMBER(<span class="number">4</span>);</span><br><span class="line">  v_empno  employees.employee_id<span class="operator">%</span>type;</span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">  v_empno:<span class="operator">=</span><span class="operator">&amp;</span>x;</span><br><span class="line">  <span class="keyword">SELECT</span> department_id <span class="keyword">INTO</span> v_deptno </span><br><span class="line">  <span class="keyword">FROM</span> employees <span class="keyword">WHERE</span> employee_id<span class="operator">=</span>v_empno;</span><br><span class="line">  IF v_deptno<span class="operator">=</span><span class="number">10</span> <span class="keyword">THEN</span> v_increment:<span class="operator">=</span><span class="number">100</span>;</span><br><span class="line">  ELSIF v_deptno<span class="operator">=</span><span class="number">20</span> <span class="keyword">THEN</span> v_increment:<span class="operator">=</span><span class="number">150</span>;</span><br><span class="line">  ELSIF v_deptno<span class="operator">=</span><span class="number">30</span> <span class="keyword">THEN</span> v_increment:<span class="operator">=</span><span class="number">200</span>;</span><br><span class="line">  <span class="keyword">ELSE</span>  v_increment:<span class="operator">=</span><span class="number">300</span>;</span><br><span class="line">  <span class="keyword">END</span> IF;</span><br><span class="line">  <span class="keyword">UPDATE</span> employees <span class="keyword">SET</span> salary<span class="operator">=</span>salary<span class="operator">+</span>v_increment </span><br><span class="line">  <span class="keyword">WHERE</span> employee_id<span class="operator">=</span>v_empno;</span><br><span class="line"><span class="keyword">END</span>; </span><br></pre></td></tr></table></figure>
+
+<h2 id="CASE语句"><a href="#CASE语句" class="headerlink" title="CASE语句"></a>CASE语句</h2><p>基本语法</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CASE</span></span><br><span class="line">  <span class="keyword">WHEN</span> condition1 <span class="keyword">THEN</span> statements1;</span><br><span class="line">  <span class="keyword">WHEN</span> condition2 <span class="keyword">THEN</span> statements2;</span><br><span class="line">  ……</span><br><span class="line">  <span class="keyword">WHEN</span> conditionn <span class="keyword">THEN</span> statementsn;</span><br><span class="line">  [<span class="keyword">ELSE</span>    else_statements;]</span><br><span class="line"><span class="keyword">END</span> <span class="keyword">CASE</span>;</span><br></pre></td></tr></table></figure>
+
+<p>💡例如：根据输入的员工号，修改该员工工资。如果该员工工资低于1000，则工资增加200；如果工资在1000～2000之间，则增加150；如果工资在2000～3000之间，则增加100；否则增加50。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DECLARE</span></span><br><span class="line">  v_sal employees.salary<span class="operator">%</span>type;</span><br><span class="line">  v_increment NUMBER(<span class="number">4</span>);</span><br><span class="line">  v_empno  employees.employee_id<span class="operator">%</span>type;</span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">  v_empno:<span class="operator">=</span><span class="operator">&amp;</span>x;</span><br><span class="line">  <span class="keyword">SELECT</span> salary <span class="keyword">INTO</span> v_sal <span class="keyword">FROM</span> employees </span><br><span class="line">  <span class="keyword">WHERE</span> employee_id<span class="operator">=</span>v_empno;</span><br><span class="line">  <span class="keyword">CASE</span>   </span><br><span class="line">     <span class="keyword">WHEN</span> v_sal<span class="operator">&lt;</span><span class="number">1000</span> <span class="keyword">THEN</span> v_increment:<span class="operator">=</span><span class="number">200</span>;</span><br><span class="line">     <span class="keyword">WHEN</span> v_sal<span class="operator">&lt;</span><span class="number">2000</span> <span class="keyword">THEN</span> v_increment:<span class="operator">=</span><span class="number">150</span>;</span><br><span class="line">     <span class="keyword">WHEN</span> v_sal<span class="operator">&lt;</span><span class="number">3000</span> <span class="keyword">THEN</span> v_increment:<span class="operator">=</span><span class="number">100</span>;</span><br><span class="line">     <span class="keyword">ELSE</span>  v_increment:<span class="operator">=</span><span class="number">50</span>;</span><br><span class="line">  <span class="keyword">END</span> <span class="keyword">CASE</span>;</span><br><span class="line">  <span class="keyword">UPDATE</span> employees <span class="keyword">SET</span> salary<span class="operator">=</span>salary<span class="operator">+</span>v_increment </span><br><span class="line">  <span class="keyword">WHERE</span> employee_id<span class="operator">=</span>v_empno;</span><br><span class="line"><span class="keyword">END</span>; </span><br></pre></td></tr></table></figure>
+
+<h1 id="循环结构"><a href="#循环结构" class="headerlink" title="循环结构"></a>循环结构</h1><h2 id="简单循环"><a href="#简单循环" class="headerlink" title="简单循环"></a>简单循环</h2><p>语法</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">LOOP</span><br><span class="line">  sequence_of_statement;</span><br><span class="line">  EXIT [<span class="keyword">WHEN</span> <span class="keyword">condition</span>] ;</span><br><span class="line">  …….</span><br><span class="line"><span class="keyword">END</span> LOOP;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*注意</span></span><br><span class="line"><span class="comment">在循环体中一定要包含EXIT语句，否则程序进入死循环 */</span></span><br></pre></td></tr></table></figure>
+
+<p>💡例如：利用简单循环求1～100之间偶数的和。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DECLARE</span></span><br><span class="line">  v_counter BINARY_INTEGER:<span class="operator">=</span><span class="number">1</span>;</span><br><span class="line">  v_sum NUMBER:<span class="operator">=</span><span class="number">0</span>;</span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">  LOOP</span><br><span class="line">    IF <span class="built_in">mod</span>(v_counter,<span class="number">2</span>)<span class="operator">=</span><span class="number">0</span> <span class="keyword">THEN</span></span><br><span class="line">      v_sum:<span class="operator">=</span>v_sum<span class="operator">+</span>v_counter;</span><br><span class="line">    <span class="keyword">END</span> IF;</span><br><span class="line">    v_counter:<span class="operator">=</span>v_counter<span class="operator">+</span><span class="number">1</span>;</span><br><span class="line">    EXIT <span class="keyword">WHEN</span> v_counter<span class="operator">&gt;</span><span class="number">100</span>;</span><br><span class="line">  <span class="keyword">END</span> LOOP;</span><br><span class="line">  DBMS_OUTPUT.PUT_LINE(v_sum);</span><br><span class="line"><span class="keyword">END</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="WHILE循环"><a href="#WHILE循环" class="headerlink" title="WHILE循环"></a>WHILE循环</h2><p>基本语法</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">WHILE <span class="keyword">condition</span> LOOP </span><br><span class="line">  sequence_of_statement;</span><br><span class="line"><span class="keyword">END</span> LOOP; </span><br></pre></td></tr></table></figure>
+
+<p>💡例如：利用WHILE循环求1～100之间偶数的和。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DECLARE</span></span><br><span class="line">  v_counter BINARY_INTEGER :<span class="operator">=</span><span class="number">1</span>;</span><br><span class="line">  v_sum NUMBER :<span class="operator">=</span><span class="number">0</span>;</span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">  WHILE v_counter <span class="operator">&lt;=</span> <span class="number">100</span> LOOP</span><br><span class="line">    IF <span class="built_in">mod</span>(v_counter,<span class="number">2</span>)<span class="operator">=</span><span class="number">0</span> <span class="keyword">THEN</span></span><br><span class="line">      v_sum:<span class="operator">=</span>v_sum<span class="operator">+</span>v_counter;</span><br><span class="line">    <span class="keyword">END</span> IF;</span><br><span class="line">    v_counter :<span class="operator">=</span> v_counter <span class="operator">+</span> <span class="number">1</span>;    </span><br><span class="line">  <span class="keyword">END</span> LOOP;</span><br><span class="line">  DBMS_OUTPUT.PUT_LINE(v_sum);</span><br><span class="line"><span class="keyword">END</span>; </span><br></pre></td></tr></table></figure>
+
+<h2 id="FOR循环"><a href="#FOR循环" class="headerlink" title="FOR循环"></a>FOR循环</h2><p>基本语法：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FOR</span> loop_counter <span class="keyword">IN</span> [REVERSE]   </span><br><span class="line">                                        low_bound..high_bound</span><br><span class="line">LOOP</span><br><span class="line">  sequence_of_statement;</span><br><span class="line"><span class="keyword">END</span> LOOP;</span><br></pre></td></tr></table></figure>
+
+<p>❗注意：</p>
+<ul>
+<li>循环变量不需要显式定义，系统隐含地将它声明为<strong>BINARY_INTEGER</strong>变量；</li>
+<li>系统默认时，循环变量从下界往上界递增计数，如果使用REVERSE关键字，则表示循环变量从上界向下界递减计数；</li>
+<li>循环变量只能在循环体中使用，不能在循环体外使用。</li>
+</ul>
+<p>💡例如：利用FOR循环求1～100之间偶数的和。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DECLARE</span></span><br><span class="line">  v_sum NUMBER :<span class="operator">=</span><span class="number">0</span>;</span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">  <span class="keyword">FOR</span> v_counter <span class="keyword">IN</span> <span class="number">1.</span><span class="number">.100</span> LOOP</span><br><span class="line">    IF <span class="built_in">mod</span>(v_counter,<span class="number">2</span>)<span class="operator">=</span><span class="number">0</span> <span class="keyword">THEN</span></span><br><span class="line">      v_sum:<span class="operator">=</span>v_sum<span class="operator">+</span>v_counter;</span><br><span class="line">    <span class="keyword">END</span> IF;</span><br><span class="line">  <span class="keyword">END</span> LOOP;</span><br><span class="line">  DBMS_OUTPUT.PUT_LINE(v_sum);</span><br><span class="line"><span class="keyword">END</span>; </span><br></pre></td></tr></table></figure>
+
+<h2 id="跳转结构"><a href="#跳转结构" class="headerlink" title="跳转结构"></a>跳转结构</h2><p>语法：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">&lt;&lt;</span> 标号 <span class="operator">&gt;&gt;</span></span><br><span class="line">...</span><br><span class="line">GOTO  标号;</span><br></pre></td></tr></table></figure>
+
+<p>📌说明：</p>
+<blockquote>
+<p>块内可以跳转，内层块可以跳到外层块，但外层块不能跳到内层。</p>
+<p>IF语句不能跳入。不能从循环体外跳入循环体内。不能从子程序外部跳到子程序中。</p>
+<p>由于<strong>goto</strong>语句的缺点，建议尽量少用甚至不用<strong>goto</strong>语句。 </p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/07/14/PL-SQL%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" data-id="cl67okwf0000yjsu93o0i8uu6" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Oracle/" rel="tag">Oracle</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PL-SQL/" rel="tag">PL/SQL</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/07/14/PL-SQL%E6%B8%B8%E6%A0%87/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          PL/SQL游标
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/05/04/Linux%E9%83%A8%E7%BD%B2Django%E9%A1%B9%E7%9B%AE/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Linux部署Django项目</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/">Spring</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/">web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/3-tier/" rel="tag">3-tier</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BFS/" rel="tag">BFS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cookie/" rel="tag">Cookie</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DFS/" rel="tag">DFS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSP/" rel="tag">JSP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVC/" rel="tag">MVC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Oracle/" rel="tag">Oracle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PL-SQL/" rel="tag">PL/SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Servlet/" rel="tag">Servlet</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Session/" rel="tag">Session</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/" rel="tag">Tomcat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c-c/" rel="tag">c/c++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdbc/" rel="tag">jdbc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xml/" rel="tag">xml</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" rel="tag">二叉树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%9E%E6%BA%AF/" rel="tag">回溯</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%90%E9%9B%86/" rel="tag">子集</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/" rel="tag">快速排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B8%B8%E6%A0%87/" rel="tag">游标</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E7%A8%8B%E6%B1%A0/" rel="tag">线程池</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%A6%E5%8F%91%E5%99%A8/" rel="tag">触发器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%94%E7%A6%BB/" rel="tag">隔离</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/3-tier/" style="font-size: 10px;">3-tier</a> <a href="/tags/BFS/" style="font-size: 10px;">BFS</a> <a href="/tags/Cookie/" style="font-size: 10px;">Cookie</a> <a href="/tags/DFS/" style="font-size: 10px;">DFS</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/MVC/" style="font-size: 10px;">MVC</a> <a href="/tags/Oracle/" style="font-size: 20px;">Oracle</a> <a href="/tags/PL-SQL/" style="font-size: 20px;">PL/SQL</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/Session/" style="font-size: 10px;">Session</a> <a href="/tags/Spring/" style="font-size: 15px;">Spring</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/c-c/" style="font-size: 10px;">c/c++</a> <a href="/tags/jdbc/" style="font-size: 10px;">jdbc</a> <a href="/tags/leetcode/" style="font-size: 10px;">leetcode</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/xml/" style="font-size: 10px;">xml</a> <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" style="font-size: 15px;">二叉树</a> <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="font-size: 10px;">回溯</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 15px;">多线程</a> <a href="/tags/%E5%AD%90%E9%9B%86/" style="font-size: 10px;">子集</a> <a href="/tags/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/" style="font-size: 10px;">快速排序</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 10px;">排序</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">机器学习</a> <a href="/tags/%E6%B8%B8%E6%A0%87/" style="font-size: 10px;">游标</a> <a href="/tags/%E7%BA%BF%E7%A8%8B%E6%B1%A0/" style="font-size: 10px;">线程池</a> <a href="/tags/%E8%A7%A6%E5%8F%91%E5%99%A8/" style="font-size: 10px;">触发器</a> <a href="/tags/%E9%9A%94%E7%A6%BB/" style="font-size: 10px;">隔离</a> <a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 10px;">集合</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 10px;">面试</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">August 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">December 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/07/30/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2021/08/17/%E6%90%AD%E5%BB%BASpringCloud%E6%9C%8D%E5%8A%A1/">搭建SpringCloud服务</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/14/PL-SQL%E8%A7%A6%E5%8F%91%E5%99%A8/">PL/SQL触发器</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/14/PL-SQL%E6%B8%B8%E6%A0%87/">PL/SQL游标</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/14/PL-SQL%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">PL/SQL基础</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

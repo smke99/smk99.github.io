@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>hash表 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="哈希表根据设定的哈希函数 H(key) 和处理冲突的方法将一组关键字映像到一个有限的地址集上，并以关键字在地址集中的“像”作为记录在表中的存储位置，这种表成为哈希表。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hash表">
+<meta property="og:url" content="http://example.com/2020/09/07/hash%E8%A1%A8/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="哈希表根据设定的哈希函数 H(key) 和处理冲突的方法将一组关键字映像到一个有限的地址集上，并以关键字在地址集中的“像”作为记录在表中的存储位置，这种表成为哈希表。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2020/09/07/hash%E8%A1%A8/1.jpg">
+<meta property="article:published_time" content="2020-09-07T11:23:09.000Z">
+<meta property="article:modified_time" content="2020-10-25T02:03:46.489Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2020/09/07/hash%E8%A1%A8/1.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-hash表" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/09/07/hash%E8%A1%A8/" class="article-date">
+  <time datetime="2020-09-07T11:23:09.000Z" itemprop="datePublished">2020-09-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      hash表
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="1.jpg"></p>
+<h1 id="哈希表"><a href="#哈希表" class="headerlink" title="哈希表"></a>哈希表</h1><p>根据设定的哈希函数 <code>H(key)</code> 和处理冲突的方法将<strong>一组关键字</strong>映像到<strong>一个有限的地址集</strong>上，并以关键字在地址集中的“像”作为记录在表中的存储位置，这种表成为哈希表。</p>
+<span id="more"></span>
+
+<p>例如，取首字母序号作为hash函数</p>
+<table>
+<thead>
+<tr>
+<th>【key】</th>
+<th>BEIJING</th>
+<th>TIANJIN</th>
+<th>HEBEI</th>
+<th>SHANGHAI</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>【f(key)】</td>
+<td>02</td>
+<td>20</td>
+<td>08</td>
+<td>19</td>
+</tr>
+</tbody></table>
+<p>可见：</p>
+<ul>
+<li><p>hash函数是一个映像，只要使得任何 <code>key</code> 由函数所得的 <code>f(key)</code>落在表长允许的范围内</p>
+</li>
+<li><p>冲突现在：不同的<strong>关键字</strong>得到同一个<strong>函数值</strong></p>
+</li>
+<li><p>⚡<em><strong>冲突只能尽可能少，而不能完全避免</strong></em>⚡</p>
+<p>集合包括：</p>
+<ul>
+<li>关键字集合：包括所有可能的关键字</li>
+<li>地址集合：哈希表的地址值</li>
+</ul>
+</li>
+</ul>
+<h2 id="hash函数构造"><a href="#hash函数构造" class="headerlink" title="hash函数构造"></a>hash函数构造</h2><p>均匀hash函数：关键字集合中的<strong>任一关键字</strong>，经hash函数映像到地址集合中的任意地址概率相等。</p>
+<p>构造方法：</p>
+<ul>
+<li><p>直接定址法：取关键字或某个线性函数值为哈希地址。</p>
+<p><strong>H (key) = key  或  H (key) = a * key +b</strong>【自身函数】</p>
+<p>💎地址集合与关键字集合大小相同，通常不同关键字不会发生冲突，但很少使用。</p>
+<blockquote>
+<p>例如：1-100岁的人口数统计表，年龄作k，h(key)=key</p>
+<p>例如：解放后每年的人口调查表，年份作key，h(key)=key+(-1948)</p>
+</blockquote>
+</li>
+<li><p>数字分析法：假设关键字以r为基，且hash表中可能出现的关键字事先知道，则可取关键字的<strong>若干位</strong>组成hash地址</p>
+</li>
+<li><p>平方取中法：取关键字平方后的中间几位为哈希地址。</p>
+<p>💎较为常用，取的位数由表长决定。</p>
+</li>
+<li><p>折叠法：将关键字分割为位数相同的几部分（最后一部分位数可不同），然后取这几部分的叠加和作为哈希地址。</p>
+<ul>
+<li>移位叠加：将分割后的每一部分的最低位对齐，然后相加</li>
+<li>间界叠加：从一端向另一端沿分割界来回折叠，然后对齐相加</li>
+</ul>
+<blockquote>
+<p>例如，图书编号0-442-20586-4</p>
+<p>移位叠加：5864+4220+04=10088     H(key)=0088</p>
+<p>间界叠加：5864+0224+04=6092       H(key)=6092</p>
+</blockquote>
+</li>
+<li><p>除留余数法：取关键字背某个不大于哈希表表长m的数p除后所得余数为哈希地址</p>
+<p><strong>H(key) = key MOD  p  ,  p≤m</strong></p>
+<p>💎最简单，最常用的方法，一般情况下，可以选p为质数或不包含小于20的质因数的合数</p>
+</li>
+<li><p>随机数法：选择一个随机函数，取关键字的<strong>随机函数值</strong>为它的哈希地址<br><strong>H(key) = random(key)</strong></p>
+<p>💎当关键字长度不等时采用此法构造hash函数</p>
+</li>
+</ul>
+<h2 id="处理冲突的方法"><a href="#处理冲突的方法" class="headerlink" title="处理冲突的方法"></a>处理冲突的方法</h2><h3 id="开放定址法"><a href="#开放定址法" class="headerlink" title="开放定址法"></a>开放定址法</h3><p><strong>Hi = ( H(key) + di)  MOD  m            i=1,2,…,k (k≤m-1)</strong>  </p>
+<blockquote>
+<p>其中，H(key)为hash函数，m为哈希表表长，di为增量序列，一般有下列三种取法：</p>
+</blockquote>
+<ol>
+<li>线性探测再散列：di = 1，2，3，…，m-1</li>
+<li>二次探测再散列：di = 1^2，-1^2，2^2，-2^2，…，±k^2  （k≤m/2）</li>
+<li>伪随机探测再散列：di = 伪随机数序列</li>
+</ol>
+<h3 id="再哈希法"><a href="#再哈希法" class="headerlink" title="再哈希法"></a>再哈希法</h3><p><strong>Hi = RHi(key)        i = 1，2，…，k</strong></p>
+<p>RHi均是不同的hash函数，及同义词产生地址冲突时计算另一个哈希函数地址，直到冲突不再发生。</p>
+<p>💎该方法不易产生“聚集”，但增加了计算时间</p>
+<h3 id="链地址法"><a href="#链地址法" class="headerlink" title="链地址法"></a>链地址法</h3><h3 id="建立一个公共溢出区"><a href="#建立一个公共溢出区" class="headerlink" title="建立一个公共溢出区"></a>建立一个公共溢出区</h3>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/09/07/hash%E8%A1%A8/" data-id="cl67okwfh001ojsu91n55e8wd" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/10/25/JDBC/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          JDBC
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/08/08/sizeof%E6%80%BB%E7%BB%93/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">sizeof总结</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/">Spring</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/">web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/3-tier/" rel="tag">3-tier</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BFS/" rel="tag">BFS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cookie/" rel="tag">Cookie</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DFS/" rel="tag">DFS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSP/" rel="tag">JSP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVC/" rel="tag">MVC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Oracle/" rel="tag">Oracle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PL-SQL/" rel="tag">PL/SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Servlet/" rel="tag">Servlet</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Session/" rel="tag">Session</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/" rel="tag">Tomcat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c-c/" rel="tag">c/c++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdbc/" rel="tag">jdbc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xml/" rel="tag">xml</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" rel="tag">二叉树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%9E%E6%BA%AF/" rel="tag">回溯</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%90%E9%9B%86/" rel="tag">子集</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/" rel="tag">快速排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B8%B8%E6%A0%87/" rel="tag">游标</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E7%A8%8B%E6%B1%A0/" rel="tag">线程池</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%A6%E5%8F%91%E5%99%A8/" rel="tag">触发器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%94%E7%A6%BB/" rel="tag">隔离</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/3-tier/" style="font-size: 10px;">3-tier</a> <a href="/tags/BFS/" style="font-size: 10px;">BFS</a> <a href="/tags/Cookie/" style="font-size: 10px;">Cookie</a> <a href="/tags/DFS/" style="font-size: 10px;">DFS</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/MVC/" style="font-size: 10px;">MVC</a> <a href="/tags/Oracle/" style="font-size: 20px;">Oracle</a> <a href="/tags/PL-SQL/" style="font-size: 20px;">PL/SQL</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/Session/" style="font-size: 10px;">Session</a> <a href="/tags/Spring/" style="font-size: 15px;">Spring</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/c-c/" style="font-size: 10px;">c/c++</a> <a href="/tags/jdbc/" style="font-size: 10px;">jdbc</a> <a href="/tags/leetcode/" style="font-size: 10px;">leetcode</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/xml/" style="font-size: 10px;">xml</a> <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" style="font-size: 15px;">二叉树</a> <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="font-size: 10px;">回溯</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 15px;">多线程</a> <a href="/tags/%E5%AD%90%E9%9B%86/" style="font-size: 10px;">子集</a> <a href="/tags/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/" style="font-size: 10px;">快速排序</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 10px;">排序</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">机器学习</a> <a href="/tags/%E6%B8%B8%E6%A0%87/" style="font-size: 10px;">游标</a> <a href="/tags/%E7%BA%BF%E7%A8%8B%E6%B1%A0/" style="font-size: 10px;">线程池</a> <a href="/tags/%E8%A7%A6%E5%8F%91%E5%99%A8/" style="font-size: 10px;">触发器</a> <a href="/tags/%E9%9A%94%E7%A6%BB/" style="font-size: 10px;">隔离</a> <a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 10px;">集合</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 10px;">面试</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">August 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">December 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/07/30/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2021/08/17/%E6%90%AD%E5%BB%BASpringCloud%E6%9C%8D%E5%8A%A1/">搭建SpringCloud服务</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/14/PL-SQL%E8%A7%A6%E5%8F%91%E5%99%A8/">PL/SQL触发器</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/14/PL-SQL%E6%B8%B8%E6%A0%87/">PL/SQL游标</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/14/PL-SQL%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">PL/SQL基础</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

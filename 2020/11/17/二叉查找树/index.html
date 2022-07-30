@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>二叉查找树 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="二叉查找树（Binary Search Tree），（又：二叉搜索树，二叉排序树）它或者是一棵空树，或者是具有下列性质的二叉树：  若它的左子树不空，则左子树上所有结点的值均小于它的根结点的值；  若它的右子树不空，则右子树上所有结点的值均大于它的根结点的值；  它的左、右子树也分别为二叉排序树。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="二叉查找树">
+<meta property="og:url" content="http://example.com/2020/11/17/%E4%BA%8C%E5%8F%89%E6%9F%A5%E6%89%BE%E6%A0%91/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="二叉查找树（Binary Search Tree），（又：二叉搜索树，二叉排序树）它或者是一棵空树，或者是具有下列性质的二叉树：  若它的左子树不空，则左子树上所有结点的值均小于它的根结点的值；  若它的右子树不空，则右子树上所有结点的值均大于它的根结点的值；  它的左、右子树也分别为二叉排序树。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/%E4%BA%8C%E5%8F%89%E6%9F%A5%E6%89%BE%E6%A0%91/bstree1.png">
+<meta property="og:image" content="http://example.com/%E4%BA%8C%E5%8F%89%E6%9F%A5%E6%89%BE%E6%A0%91/bstree2.png">
+<meta property="og:image" content="http://example.com/%E4%BA%8C%E5%8F%89%E6%9F%A5%E6%89%BE%E6%A0%91/bstree3.png">
+<meta property="og:image" content="http://example.com/%E4%BA%8C%E5%8F%89%E6%9F%A5%E6%89%BE%E6%A0%91/bstree4.png">
+<meta property="og:image" content="http://example.com/%E4%BA%8C%E5%8F%89%E6%9F%A5%E6%89%BE%E6%A0%91/bstree5.png">
+<meta property="article:published_time" content="2020-11-17T11:40:16.000Z">
+<meta property="article:modified_time" content="2021-02-25T15:46:51.566Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="二叉树">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/%E4%BA%8C%E5%8F%89%E6%9F%A5%E6%89%BE%E6%A0%91/bstree1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-二叉查找树" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/11/17/%E4%BA%8C%E5%8F%89%E6%9F%A5%E6%89%BE%E6%A0%91/" class="article-date">
+  <time datetime="2020-11-17T11:40:16.000Z" itemprop="datePublished">2020-11-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      二叉查找树
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>二叉查找树（Binary Search Tree），（又：二叉搜索树，二叉排序树）它或者是一棵空树，或者是具有下列性质的二叉树：</p>
+<ul>
+<li>若它的左子树不空，则<strong>左子树</strong>上所有结点的值均<strong>小于</strong>它的<strong>根</strong>结点的值； </li>
+<li>若它的右子树不空，则<strong>右子树</strong>上所有结点的值均<strong>大于</strong>它的<strong>根</strong>结点的值； </li>
+<li>它的左、右子树也分别为二叉排序树。</li>
+</ul>
+<span id="more"></span>
+
+<p>二叉搜索树作为一种经典的数据结构，它既有链表的<strong>快速插入与删除</strong>操作的特点，又有数组<strong>快速查找</strong>的优势；所以应用十分广泛，例如在文件系统和数据库系统一般会采用这种数据结构进行高效率的<strong>排序与检索</strong>操作。</p>
+<p>使用Java实现二叉查找树：</p>
+<h1 id="结点类"><a href="#结点类" class="headerlink" title="结点类"></a>结点类</h1><table>
+<thead>
+<tr>
+<th>类名</th>
+<th>Node &lt;key, value&gt;</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>构造方法</td>
+<td>Node(Key key, Value value, Node left, Node right)：创建Node对象</td>
+</tr>
+<tr>
+<td>成员变量</td>
+<td>public Key key:存储键 <br />public Value value:存储值 <br />public Node left:记录左子结点 <br />public Node right:记录右子结点</td>
+</tr>
+</tbody></table>
+<p>代码实现：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Node</span> &#123;</span><br><span class="line">    <span class="comment">//存储键</span></span><br><span class="line">    <span class="keyword">public</span> Key key;</span><br><span class="line">    <span class="comment">//存储值</span></span><br><span class="line">    <span class="keyword">public</span> Value value;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//左子结点</span></span><br><span class="line">    <span class="keyword">public</span> Node left;</span><br><span class="line">    <span class="comment">//右子结点</span></span><br><span class="line">    <span class="keyword">public</span> Node right;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Node</span><span class="params">(Key key, Value value, Node left, Node right)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.key = key;</span><br><span class="line">        <span class="built_in">this</span>.value = value;</span><br><span class="line">        <span class="built_in">this</span>.left = left;</span><br><span class="line">        <span class="built_in">this</span>.right = right;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="API实现"><a href="#API实现" class="headerlink" title="API实现"></a>API实现</h1><table>
+<thead>
+<tr>
+<th>类名</th>
+<th>BinaryTree,Value value&gt;</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>构造方法</td>
+<td>BinaryTree()：创建BinaryTree对象</td>
+</tr>
+<tr>
+<td>成员变量</td>
+<td>private Node root:记录根结点 <br />private int N:记录树中元素的个数</td>
+</tr>
+<tr>
+<td>成员方法</td>
+<td>1.public void put(Key key,Value value):向树中插入一个键值对 <br />2.private Node put(Node x, Key key, Value val)：给指定树x上，添加键一个键值对，并返回添加后的新树 <br />3.public Value get(Key key):根据key，从树中找出对应的值 <br />4.private Value get(Node x, Key key):从指定的树x中，找出key对应的值 <br />5.public void delete(Key key):根据key，删除树中对应的键值对 <br />6.private Node delete(Node x, Key key):删除指定树x上的键为key的键值对，并返回删除后的新树 <br />7.public int size():获取树中元素的个数</td>
+</tr>
+</tbody></table>
+<p>代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//二叉查找树</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">BinaryTree</span>&lt;Key <span class="keyword">extends</span> <span class="title class_">Comparable</span>&lt;Key&gt;,Value&gt; &#123;</span><br><span class="line">    <span class="comment">//根节点</span></span><br><span class="line">    <span class="keyword">public</span> Node root;</span><br><span class="line">    <span class="comment">//元素个数</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> N;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Node</span> &#123;</span><br><span class="line">        <span class="comment">//存储键</span></span><br><span class="line">        <span class="keyword">public</span> Key key;</span><br><span class="line">        <span class="comment">//存储值</span></span><br><span class="line">        <span class="keyword">public</span> Value value;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//左子结点</span></span><br><span class="line">        <span class="keyword">public</span> Node left;</span><br><span class="line">        <span class="comment">//右子结点</span></span><br><span class="line">        <span class="keyword">public</span> Node right;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="title function_">Node</span><span class="params">(Key key, Value value, Node left, Node right)</span> &#123;</span><br><span class="line">            <span class="built_in">this</span>.key = key;</span><br><span class="line">            <span class="built_in">this</span>.value = value;</span><br><span class="line">            <span class="built_in">this</span>.left = left;</span><br><span class="line">            <span class="built_in">this</span>.right = right;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//获取树的元素个数</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">size</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> N;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="插入方法put"><a href="#插入方法put" class="headerlink" title="插入方法put"></a>插入方法put</h2><ol>
+<li><p>如果当前树中没有任何一个结点，则直接把新结点当做根结点使用</p>
+</li>
+<li><p>如果当前树不为空，则从根结点开始：</p>
+<ul>
+<li>如果新结点的key小于当前结点的key，则继续找当前结点的左子结点；</li>
+<li>如果新结点的key大于当前结点的key，则继续找当前结点的右子结点；</li>
+<li>如果新结点的key等于当前结点的key，则树中已经存在这样的结点，替换该结点的value值即可。</li>
+</ul>
+</li>
+</ol>
+<p><img src="/%E4%BA%8C%E5%8F%89%E6%9F%A5%E6%89%BE%E6%A0%91/bstree1.png"></p>
+<p><img src="/%E4%BA%8C%E5%8F%89%E6%9F%A5%E6%89%BE%E6%A0%91/bstree2.png"></p>
+<p>代码实现：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//向树中添加元素key-value</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">put</span><span class="params">(Key key, Value value)</span> &#123;</span><br><span class="line">    root = put(root, key, value);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//向指定的树x中添加key-value,并返回添加元素后新的树</span></span><br><span class="line"><span class="keyword">private</span> Node <span class="title function_">put</span><span class="params">(Node x, Key key, Value value)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(x == <span class="literal">null</span>)&#123;</span><br><span class="line">        N++;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Node</span>(key,value,<span class="literal">null</span>,<span class="literal">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="variable">cmp</span> <span class="operator">=</span> key.compareTo(x.key);</span><br><span class="line">    <span class="keyword">if</span>(cmp&gt;<span class="number">0</span>)&#123;</span><br><span class="line">        <span class="comment">//新结点的key大于当前结点的key，继续找当前结点的右子结点</span></span><br><span class="line">        x.right = put(x.right,key,value);</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(cmp&lt;<span class="number">0</span>)&#123;</span><br><span class="line">        <span class="comment">//新结点的key小于当前结点的key，继续找当前结点的左子结点</span></span><br><span class="line">        x.left = put(x.left,key,value);</span><br><span class="line">    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">//新结点的key等于当前结点的key，把当前结点的value进行替换</span></span><br><span class="line">        x.value = value;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="查找方法get"><a href="#查找方法get" class="headerlink" title="查找方法get"></a>查找方法get</h2><p>从根结点开始：</p>
+<ol>
+<li>如果要查询的key小于当前结点的key，则继续找当前结点的左子结点；</li>
+<li>如果要查询的key大于当前结点的key，则继续找当前结点的右子结点；</li>
+<li>如果要查询的key等于当前结点的key，则树中返回当前结点的value。</li>
+</ol>
+<p>代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//查询树中指定key对应的value</span></span><br><span class="line"><span class="keyword">public</span> Value <span class="title function_">get</span><span class="params">(Key key)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> get(root,key);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//从指定的树x中，查找key对应的值</span></span><br><span class="line"><span class="keyword">private</span> Value <span class="title function_">get</span><span class="params">(Node x, Key key)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(x == <span class="literal">null</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">cmp</span> <span class="operator">=</span> key.compareTo(x.key);</span><br><span class="line">    <span class="keyword">if</span>(cmp &gt; <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="comment">//如果要查询的key大于当前结点的key，则继续找当前结点的右子结点；</span></span><br><span class="line">        <span class="keyword">return</span> get(x.right,key);</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(cmp &lt; <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="comment">//如果要查询的key小于当前结点的key，则继续找当前结点的左子结点；</span></span><br><span class="line">        <span class="keyword">return</span> get(x.left,key);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="comment">//如果要查询的key等于当前结点的key，则树中返回当前结点的value。</span></span><br><span class="line">        <span class="keyword">return</span> x.value;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="删除方法delete"><a href="#删除方法delete" class="headerlink" title="删除方法delete"></a>删除方法delete</h2><ol>
+<li>找到被删除结点；</li>
+<li>找到被删除结点右子树中的最小结点minNode</li>
+<li>删除右子树中的最小结点</li>
+<li>让被删除结点的左子树称为最小结点minNode的左子树，让被删除结点的右子树称为最小结点minNode的右子树</li>
+<li>让被删除结点的父节点指向最小结点minNode</li>
+</ol>
+<p><img src="/%E4%BA%8C%E5%8F%89%E6%9F%A5%E6%89%BE%E6%A0%91/bstree3.png"></p>
+<p><img src="/%E4%BA%8C%E5%8F%89%E6%9F%A5%E6%89%BE%E6%A0%91/bstree4.png"></p>
+<p><img src="/%E4%BA%8C%E5%8F%89%E6%9F%A5%E6%89%BE%E6%A0%91/bstree5.png"></p>
+<p>代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//删除树中key对应的value</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">delete</span><span class="params">(Key key)</span> &#123;</span><br><span class="line">    delete(root, key);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//删除指定树x中的key对应的value，并返回删除后的新树</span></span><br><span class="line"><span class="keyword">private</span> Node <span class="title function_">delete</span><span class="params">(Node x, Key key)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (x == <span class="literal">null</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="variable">cmp</span> <span class="operator">=</span> key.compareTo(x.key);</span><br><span class="line">    <span class="keyword">if</span> (cmp &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">//新结点的key大于当前结点的key，继续找当前结点的右子结点</span></span><br><span class="line">        x.right = delete(x.right, key);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (cmp &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">//新结点的key小于当前结点的key，继续找当前结点的左子结点</span></span><br><span class="line">        x.left = delete(x.left, key);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">//新结点的key等于当前结点的key,当前x就是要删除的结点</span></span><br><span class="line">        <span class="comment">//1.如果当前结点的右子树不存在，则直接返回当前结点的左子结点</span></span><br><span class="line">        <span class="keyword">if</span> (x.right == <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> x.left;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//2.如果当前结点的左子树不存在，则直接返回当前结点的右子结点</span></span><br><span class="line">        <span class="keyword">if</span> (x.left == <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> x.right;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//3.当前结点的左右子树都存在</span></span><br><span class="line">        <span class="comment">//3.1找到右子树中最小的结点</span></span><br><span class="line">        <span class="type">Node</span> <span class="variable">minNode</span> <span class="operator">=</span> x.right;</span><br><span class="line">        <span class="keyword">while</span> (minNode.left != <span class="literal">null</span>) &#123;</span><br><span class="line">            minNode = minNode.left;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//3.2删除右子树中最小的结点</span></span><br><span class="line">        <span class="type">Node</span> <span class="variable">n</span> <span class="operator">=</span> x.right;</span><br><span class="line">        <span class="keyword">while</span> (n.left != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (n.left.left == <span class="literal">null</span>) &#123;</span><br><span class="line">                n.left = <span class="literal">null</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                n = n.left;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//3.3让被删除结点的左子树称为最小结点minNode的左子树，让被删除结点的右子树称为最小结点minNode的右子树</span></span><br><span class="line">        minNode.left = x.left;</span><br><span class="line">        minNode.right = x.right;</span><br><span class="line">        <span class="comment">//3.4让被删除结点的父节点指向最小结点minNode</span></span><br><span class="line">        x = minNode;</span><br><span class="line">        <span class="comment">//个数-1</span></span><br><span class="line">        N--;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="查找最小键和最大键"><a href="#查找最小键和最大键" class="headerlink" title="查找最小键和最大键"></a>查找最小键和最大键</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//找出整个树中最小的键</span></span><br><span class="line"><span class="keyword">public</span> Key <span class="title function_">min</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> min(root).key;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//找出指定树x中最小的键所在的结点</span></span><br><span class="line"><span class="keyword">private</span> Node <span class="title function_">min</span><span class="params">(Node x)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(x.left!=<span class="literal">null</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> min(x.left);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> x;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//找出整个树中最小的键</span></span><br><span class="line"><span class="keyword">public</span> Key <span class="title function_">max</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> max(root).key;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//找出指定树x中最小的键所在的结点</span></span><br><span class="line"><span class="keyword">private</span> Node <span class="title function_">max</span><span class="params">(Node x)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(x.right!=<span class="literal">null</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> min(x.right);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> x;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/11/17/%E4%BA%8C%E5%8F%89%E6%9F%A5%E6%89%BE%E6%A0%91/" data-id="cl67okwg9002ojsu9a3a222t3" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" rel="tag">二叉树</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/12/08/Android%E4%B8%ADJS%E8%B0%83%E7%94%A8Java%E6%96%B9%E6%B3%95/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Android中JS调用Java方法
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/11/13/leetcode-78%E5%AD%90%E9%9B%86/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">leetcode-78子集</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/">Spring</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/">web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/3-tier/" rel="tag">3-tier</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BFS/" rel="tag">BFS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cookie/" rel="tag">Cookie</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DFS/" rel="tag">DFS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSP/" rel="tag">JSP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVC/" rel="tag">MVC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Oracle/" rel="tag">Oracle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PL-SQL/" rel="tag">PL/SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Servlet/" rel="tag">Servlet</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Session/" rel="tag">Session</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/" rel="tag">Tomcat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c-c/" rel="tag">c/c++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdbc/" rel="tag">jdbc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xml/" rel="tag">xml</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" rel="tag">二叉树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%9E%E6%BA%AF/" rel="tag">回溯</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%90%E9%9B%86/" rel="tag">子集</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/" rel="tag">快速排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B8%B8%E6%A0%87/" rel="tag">游标</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E7%A8%8B%E6%B1%A0/" rel="tag">线程池</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%A6%E5%8F%91%E5%99%A8/" rel="tag">触发器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%94%E7%A6%BB/" rel="tag">隔离</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/3-tier/" style="font-size: 10px;">3-tier</a> <a href="/tags/BFS/" style="font-size: 10px;">BFS</a> <a href="/tags/Cookie/" style="font-size: 10px;">Cookie</a> <a href="/tags/DFS/" style="font-size: 10px;">DFS</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/MVC/" style="font-size: 10px;">MVC</a> <a href="/tags/Oracle/" style="font-size: 20px;">Oracle</a> <a href="/tags/PL-SQL/" style="font-size: 20px;">PL/SQL</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/Session/" style="font-size: 10px;">Session</a> <a href="/tags/Spring/" style="font-size: 15px;">Spring</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/c-c/" style="font-size: 10px;">c/c++</a> <a href="/tags/jdbc/" style="font-size: 10px;">jdbc</a> <a href="/tags/leetcode/" style="font-size: 10px;">leetcode</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/xml/" style="font-size: 10px;">xml</a> <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" style="font-size: 15px;">二叉树</a> <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="font-size: 10px;">回溯</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 15px;">多线程</a> <a href="/tags/%E5%AD%90%E9%9B%86/" style="font-size: 10px;">子集</a> <a href="/tags/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/" style="font-size: 10px;">快速排序</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 10px;">排序</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">机器学习</a> <a href="/tags/%E6%B8%B8%E6%A0%87/" style="font-size: 10px;">游标</a> <a href="/tags/%E7%BA%BF%E7%A8%8B%E6%B1%A0/" style="font-size: 10px;">线程池</a> <a href="/tags/%E8%A7%A6%E5%8F%91%E5%99%A8/" style="font-size: 10px;">触发器</a> <a href="/tags/%E9%9A%94%E7%A6%BB/" style="font-size: 10px;">隔离</a> <a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 10px;">集合</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 10px;">面试</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">August 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">December 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/07/30/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2021/08/17/%E6%90%AD%E5%BB%BASpringCloud%E6%9C%8D%E5%8A%A1/">搭建SpringCloud服务</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/14/PL-SQL%E8%A7%A6%E5%8F%91%E5%99%A8/">PL/SQL触发器</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/14/PL-SQL%E6%B8%B8%E6%A0%87/">PL/SQL游标</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/14/PL-SQL%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">PL/SQL基础</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

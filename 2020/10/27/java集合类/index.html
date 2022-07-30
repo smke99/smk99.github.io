@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>java集合类 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="集合是java提供的一种容器，可以存储多个数据。集合与数组的不同：  数组的长度是固定的，集合的长度是可变的 数组存储同一类型的元素，存储基本数据类型；集合存储对象的引用，可以是不同的对象类型">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java集合类">
+<meta property="og:url" content="http://example.com/2020/10/27/java%E9%9B%86%E5%90%88%E7%B1%BB/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="集合是java提供的一种容器，可以存储多个数据。集合与数组的不同：  数组的长度是固定的，集合的长度是可变的 数组存储同一类型的元素，存储基本数据类型；集合存储对象的引用，可以是不同的对象类型">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/java%E9%9B%86%E5%90%88%E7%B1%BB/%E9%9B%86%E5%90%88%E7%B1%BB.png">
+<meta property="article:published_time" content="2020-10-27T15:44:45.000Z">
+<meta property="article:modified_time" content="2021-02-26T05:59:54.311Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="集合">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/java%E9%9B%86%E5%90%88%E7%B1%BB/%E9%9B%86%E5%90%88%E7%B1%BB.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-java集合类" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/10/27/java%E9%9B%86%E5%90%88%E7%B1%BB/" class="article-date">
+  <time datetime="2020-10-27T15:44:45.000Z" itemprop="datePublished">2020-10-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Java/">Java</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      java集合类
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>集合是java提供的一种容器，可以存储多个数据。<br>集合与数组的不同：</p>
+<ul>
+<li>数组的长度是<strong>固定的</strong>，集合的长度是<strong>可变的</strong></li>
+<li>数组存储同一类型的元素，存储基本数据类型；集合存储对象的引用，可以是不同的对象类型</li>
+</ul>
+<span id="more"></span>
+
+<h1 id="常见集合类的继承关系"><a href="#常见集合类的继承关系" class="headerlink" title="常见集合类的继承关系"></a>常见集合类的继承关系</h1><p><img src="/java%E9%9B%86%E5%90%88%E7%B1%BB/%E9%9B%86%E5%90%88%E7%B1%BB.png"></p>
+<h1 id="Collection接口"><a href="#Collection接口" class="headerlink" title="Collection接口"></a>Collection接口</h1><p>常用方法：</p>
+<table>
+<thead>
+<tr>
+<th align="center">方法</th>
+<th align="center">功能描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">public boolean add(E e)</td>
+<td align="center">把给定的对象添加到当前集合中</td>
+</tr>
+<tr>
+<td align="center">public void clear()</td>
+<td align="center">清空集合中所有的元素</td>
+</tr>
+<tr>
+<td align="center">public boolean remove(E e)</td>
+<td align="center">把给定的对象在当前集合中删除</td>
+</tr>
+<tr>
+<td align="center">public boolean contains(E e)</td>
+<td align="center">判断当前集合中是否包含给定的对象</td>
+</tr>
+<tr>
+<td align="center">public boolean isEmpty()</td>
+<td align="center">判断当前集合是否为空</td>
+</tr>
+<tr>
+<td align="center">public int size()</td>
+<td align="center">返回集合中元素的个数</td>
+</tr>
+<tr>
+<td align="center">public Object[] toArray()</td>
+<td align="center">把集合中的元素，存储到数组中</td>
+</tr>
+</tbody></table>
+<h2 id="Iterator迭代器"><a href="#Iterator迭代器" class="headerlink" title="Iterator迭代器"></a>Iterator迭代器</h2><p><strong>迭代</strong>：即Collection集合元素的通用获取方式。在取元素之前先要判断集合中有没有元素，如果有，就把这个元素取出来，继续在判断，如果还有就再取出出来。一直把集合中的所有元素全部取出。这种取出方式专业术语称为迭代。</p>
+<p>Collection和Map接口主要用于存储元素，Iterator主要用于迭代访问（即遍历）Collection中的元素<br>常用方法：</p>
+<table>
+<thead>
+<tr>
+<th align="center">方法</th>
+<th align="center">功能描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">public Iterator iterator()</td>
+<td align="center">获取集合对应的迭代器，用来遍历集合中的元素</td>
+</tr>
+<tr>
+<td align="center">public boolean add(E e)</td>
+<td align="center">把给定的对象添加到当前集合中</td>
+</tr>
+<tr>
+<td align="center">public void clear()</td>
+<td align="center">清空集合中所有的元素</td>
+</tr>
+</tbody></table>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Collection;</span><br><span class="line"><span class="keyword">import</span> java.util.Iterator;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test2_Iterator</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        Collection&lt;String&gt; coll = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;String&gt;();</span><br><span class="line"></span><br><span class="line">        coll.add(<span class="string">&quot;艾伦&quot;</span>);</span><br><span class="line">        coll.add(<span class="string">&quot;三笠&quot;</span>);</span><br><span class="line">        coll.add(<span class="string">&quot;阿尔敏&quot;</span>);</span><br><span class="line"></span><br><span class="line">        Iterator&lt;String&gt; it = coll.iterator();</span><br><span class="line">        <span class="keyword">while</span> (it.hasNext()) &#123;</span><br><span class="line">            System.out.println(it.next());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当遍历集合时，首先通过调用t集合的iterator()方法获得迭代器对象，然后使用hashNext()方法判断集合中是否存在下一个元素，如果存在，则调用next()方法将元素取出，否则说明已到达了集合末尾，停止遍历元素。</p>
+<p><strong>增强for</strong>：也称for each循环，是JDK1.5以后的高级for循环，专门用来遍历数组和集合。它的内部原理其实是个Iterator迭代器，所以在遍历的过程中，不能对集合中的元素进行增删操作。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//格式：</span></span><br><span class="line"><span class="keyword">for</span>(元素的数据类型  变量 : Collection集合or数组)&#123; </span><br><span class="line">  	<span class="comment">//写操作代码</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="List接口"><a href="#List接口" class="headerlink" title="List接口"></a>List接口</h2><p>在List集合中的元素允许重复，所有的元素线性方式存储，在程序中可以通过索引访问集合中的指定元素。各元素的存储顺序就是插入的顺序。<br>常用方法：</p>
+<table>
+<thead>
+<tr>
+<th align="center">方法</th>
+<th align="center">功能描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">public void add(int index, E element)</td>
+<td align="center">将指定的元素，添加到该集合中的指定位置上</td>
+</tr>
+<tr>
+<td align="center">public E get(int index)</td>
+<td align="center">返回集合中指定位置的元素</td>
+</tr>
+<tr>
+<td align="center">public E remove(int index)</td>
+<td align="center">移除列表中指定位置的元素, 返回的是被移除的元素</td>
+</tr>
+<tr>
+<td align="center">public E set(int index, E element)</td>
+<td align="center">用指定元素替换集合中指定位置的元素,返回值是更新前的元素</td>
+</tr>
+</tbody></table>
+<ul>
+<li>ArrayList集合：数据存储的结构是<strong>数据结构</strong>。元素查找快，增删慢，是最常用的集合</li>
+<li>LinkedList集合：数据存储的结构是<strong>链表结构</strong>。便于元素添加、删除。</li>
+</ul>
+<h2 id="Set接口"><a href="#Set接口" class="headerlink" title="Set接口"></a>Set接口</h2><p><strong>java.util.Set</strong>接口和 <strong>java.util.List</strong> 接口一样，同样继承自 Collection 接口，它与 Collection 接口中的方法基本一致，并没有对 Collection 接口进行功能上的扩充，只是比Collection 接口更加严格了。与 List 接口不同的是， Set 接口中元素无序，并且都会以某种规则保证存入的元素不出现重复。</p>
+<blockquote>
+<p>💎Set的构造有一个约束条件，传入的Collection对象不能有重复值</p>
+</blockquote>
+<h3 id="HashSet"><a href="#HashSet" class="headerlink" title="HashSet"></a>HashSet</h3><p>java.util.HashSet 是 Set 接口的一个实现类，它所存储的元素是不可重复的，并且元素都是无序的(即存取顺序不一致)。HashSet 是根据对象的哈希值来确定元素在集合中的存储位置，因此具有良好的存取和查找性能。保证元素唯一性的方式依赖于： hashCode 与 equals 方法。</p>
+<blockquote>
+<p>在JDK1.8之前，哈希表底层采用数组+链表实现，即使用链表处理冲突，同一hash值的链表都存储在一个链表里。但是当位于一个桶中的元素较多，即hash值相等的元素较多时，通过key值依次查找的效率较低。而JDK1.8中，哈希表存储采用数组+链表+红黑树实现，当链表长度超过阈值（8）时，将链表转换为红黑树，这样大大减少了查找时间。简单的来说，哈希表是由数组+链表+红黑树（JDK1.8增加了红黑树部分）实现的,JDK1.8引入红黑树大程度优化了HashMap的性能，那么对于我们来讲保证HashSet集合元素的唯一，其实就是根据对象的hashCode和equals方法来决定的。如果我们往集合中存放自定义的对象，那么保证其唯一，就必须复写hashCode和equals方法建立属于当前对象的比较方式。</p>
+</blockquote>
+<p>给HashSet中存放自定义类型元素时，需要重写对象中的hashCode和equals方法，建立自己的比较方式，才能保证HashSet集合中的对象唯一：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Objects;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Student</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> age;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Student</span><span class="params">()</span>&#123;&#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Student</span><span class="params">(String name,<span class="type">int</span> age)</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">        <span class="built_in">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getName</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setName</span><span class="params">(String name)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getAge</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setAge</span><span class="params">(<span class="type">int</span> age)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">equals</span><span class="params">(Object o)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">this</span> == o)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(o == <span class="literal">null</span> || getClass() != o.getClass())&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">Student</span> <span class="variable">student</span> <span class="operator">=</span> (Student) o;</span><br><span class="line">        <span class="keyword">return</span> age == student.age &amp;&amp;</span><br><span class="line">                Objects.equals(name,student.name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">hashCode</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Objects.hash(name,age);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.HashSet;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">HashSetDemo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        HashSet&lt;Student&gt; stuSet = <span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;Student&gt;();</span><br><span class="line"></span><br><span class="line">        <span class="type">Student</span> <span class="variable">stu</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;于谦&quot;</span>, <span class="number">43</span>);</span><br><span class="line">        stuSet.add(stu);</span><br><span class="line">        stuSet.add(<span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;郭德纲&quot;</span>, <span class="number">44</span>));</span><br><span class="line">        stuSet.add(<span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;于谦&quot;</span>, <span class="number">43</span>));</span><br><span class="line">        stuSet.add(<span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;郭麒麟&quot;</span>, <span class="number">23</span>));</span><br><span class="line">        stuSet.add(stu);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (Student stu2 : stuSet) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;name=&quot;</span> + stu2.getName() + <span class="string">&quot;,age=&quot;</span> + stu2.getAge());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">执行结果：</span><br><span class="line">name=郭德纲,age=<span class="number">44</span></span><br><span class="line">name=于谦,age=<span class="number">43</span></span><br><span class="line">name=郭麒麟,age=<span class="number">23</span></span><br></pre></td></tr></table></figure>
+<h3 id="LinkHashSet"><a href="#LinkHashSet" class="headerlink" title="LinkHashSet"></a>LinkHashSet</h3><p>要保证有序，在HashSet下面有一个子类 <strong>java.util.LinkedHashSet</strong> ，它是链表和哈希表组合的一个数据存储结构。</p>
+<h2 id="Collections"><a href="#Collections" class="headerlink" title="Collections"></a>Collections</h2><p><strong>java.utils.Collections</strong> 是集合工具类，用来对集合进行操作。部分方法如下：</p>
+<table>
+<thead>
+<tr>
+<th align="center">方法</th>
+<th align="center">功能描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">public static <T> boolean addAll(Collection<T> c, T… elements)</td>
+<td align="center">往集合中添加一些元素</td>
+</tr>
+<tr>
+<td align="center">public static void shuffle(List&lt;?&gt; list)</td>
+<td align="center">打乱集合顺序</td>
+</tr>
+<tr>
+<td align="center">public static <T> void sort(List<T> list)</td>
+<td align="center">将集合中元素按照默认规则排序</td>
+</tr>
+<tr>
+<td align="center">public static <T> void sort(List<T> list，Comparator&lt;? super T&gt; )</td>
+<td align="center">将集合中元素按照指定规则排序</td>
+</tr>
+</tbody></table>
+<h1 id="Map集合"><a href="#Map集合" class="headerlink" title="Map集合"></a>Map集合</h1><p>Collection接口定义的是<strong>单列集合</strong>。<br>而Map集合没有继承Collection接口，定义的是<strong>双列集合</strong>，提供<strong>Map &lt;key,value&gt;<strong>的映射关系，</strong>Map集合不能包含相同的键key，每个键key只能映射一个键值value</strong>。</p>
+<p>常用子类：</p>
+<ul>
+<li><strong>HashMap</strong>：存储数据采用的哈希表结构，元素的存取顺序不能保证一致。由于要保证键的唯一、不重复，需要重写键的hashCode()方法、equals()方法。</li>
+<li><strong>LinkedHashMap</strong>：HashMap下有个子类LinkedHashMap，存储数据采用的哈希表结构+链表结构。通过链表结构可以<strong>保证元素的存取顺序一致</strong>；通过哈希表结构可以保证的键的唯一、不重复，需要重写键的hashCode()方法、equals()方法</li>
+</ul>
+<blockquote>
+<p>💎Map接口中的集合都有两个泛型变量,在使用时，要为两个泛型变量赋予数据类型。两个泛型变量的数据类型可以相同，也可以不同。</p>
+</blockquote>
+<p>常用方法：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>功能描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public V put(K key, V value)</td>
+<td>把指定的键与指定的值添加到Map集合中</td>
+</tr>
+<tr>
+<td>public V remove(Object key)</td>
+<td>把指定的键 所对应的键值对元素 在Map集合中删除，返回被删除元素的值</td>
+</tr>
+<tr>
+<td>public V get(Object key)</td>
+<td>根据指定的键，在Map集合中获取对应的值</td>
+</tr>
+<tr>
+<td>boolean containsKey(Object key)</td>
+<td>判断集合中是否包含指定的键</td>
+</tr>
+<tr>
+<td>public Set<K> keySet()</td>
+<td>获取Map集合中所有的键，存储到Set集合中</td>
+</tr>
+<tr>
+<td>public Set&lt;Map.Entry&lt;K,V&gt;&gt; entrySet()</td>
+<td>获取到Map集合中所有的键值对对象的集合(Set集合)</td>
+</tr>
+</tbody></table>
+<p>map的遍历1（键找值）：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">HashMap&lt;String, String&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, String&gt;();</span><br><span class="line"></span><br><span class="line">map.put(<span class="string">&quot;name&quot;</span>,<span class="string">&quot;bob&quot;</span>);</span><br><span class="line">map.put(<span class="string">&quot;age&quot;</span>,<span class="string">&quot;20&quot;</span>);</span><br><span class="line">map.put(<span class="string">&quot;job&quot;</span>,<span class="string">&quot;designer&quot;</span>);</span><br><span class="line"></span><br><span class="line">Set&lt;String&gt; keys = map.keySet();</span><br><span class="line"><span class="keyword">for</span>(String key: keys)&#123;</span><br><span class="line">      <span class="type">String</span> <span class="variable">value</span> <span class="operator">=</span> map.get(key);</span><br><span class="line">      System.out.println(key + <span class="string">&quot;:&quot;</span> + value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>map的遍历2（Entry键值对）：<br>Map 中存放的是两种对象，一种称为key(键)，一种称为value(值)，它们在在 Map 中是一一对应关系，这一对对象又称做 Map 中的一个 Entry(项) 。Entry 将键值对的对应关系封装成了对象。即键值对对象，这样我们在遍历 Map 集合时，就可以从每一个键值对（ Entry ）对象中获取对应的键与对应的值。<br>方法：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>功能描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public K getKey()</td>
+<td>获取Entry对象中的键</td>
+</tr>
+<tr>
+<td>public V getValue()</td>
+<td>获取Entry对象中的值</td>
+</tr>
+<tr>
+<td>public Set&lt;Map.Entry&lt;K,V&gt;&gt; entrySet()</td>
+<td>获取到Map集合中所有的键值对对象的集合(Set集合)</td>
+</tr>
+</tbody></table>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">HashMap&lt;String,String&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, String&gt;();</span><br><span class="line"></span><br><span class="line">map.put(<span class="string">&quot;木玛&quot;</span>,<span class="string">&quot;木马乐队&quot;</span>);</span><br><span class="line">map.put(<span class="string">&quot;华东&quot;</span>,<span class="string">&quot;重塑雕像的权利&quot;</span>);</span><br><span class="line">map.put(<span class="string">&quot;李剑&quot;</span>,<span class="string">&quot;大波浪乐队&quot;</span>);   </span><br><span class="line"></span><br><span class="line">Set&lt;Map.Entry&lt;String,String&gt;&gt; entrySet = map.entrySet();</span><br><span class="line"><span class="keyword">for</span>(Map.Entry&lt;String,String&gt; entry : entrySet)&#123;</span><br><span class="line">      <span class="type">String</span> <span class="variable">key</span> <span class="operator">=</span> entry.getKey();</span><br><span class="line">      <span class="type">String</span> <span class="variable">value</span> <span class="operator">=</span> entry.getValue();</span><br><span class="line">      System.out.println(key + <span class="string">&quot;:&quot;</span> + value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/10/27/java%E9%9B%86%E5%90%88%E7%B1%BB/" data-id="cl67okwfs001yjsu99o62a65n" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/10/29/%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%E6%A1%88%E4%BE%8B/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          用户登录案例
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/10/27/servlet%E5%AD%A6%E4%B9%A0/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Servlet学习</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/">Spring</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/">web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/3-tier/" rel="tag">3-tier</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BFS/" rel="tag">BFS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cookie/" rel="tag">Cookie</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DFS/" rel="tag">DFS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSP/" rel="tag">JSP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVC/" rel="tag">MVC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Oracle/" rel="tag">Oracle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PL-SQL/" rel="tag">PL/SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Servlet/" rel="tag">Servlet</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Session/" rel="tag">Session</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/" rel="tag">Tomcat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c-c/" rel="tag">c/c++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdbc/" rel="tag">jdbc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xml/" rel="tag">xml</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" rel="tag">二叉树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%9E%E6%BA%AF/" rel="tag">回溯</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%90%E9%9B%86/" rel="tag">子集</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/" rel="tag">快速排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B8%B8%E6%A0%87/" rel="tag">游标</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E7%A8%8B%E6%B1%A0/" rel="tag">线程池</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%A6%E5%8F%91%E5%99%A8/" rel="tag">触发器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%94%E7%A6%BB/" rel="tag">隔离</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/3-tier/" style="font-size: 10px;">3-tier</a> <a href="/tags/BFS/" style="font-size: 10px;">BFS</a> <a href="/tags/Cookie/" style="font-size: 10px;">Cookie</a> <a href="/tags/DFS/" style="font-size: 10px;">DFS</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/MVC/" style="font-size: 10px;">MVC</a> <a href="/tags/Oracle/" style="font-size: 20px;">Oracle</a> <a href="/tags/PL-SQL/" style="font-size: 20px;">PL/SQL</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/Session/" style="font-size: 10px;">Session</a> <a href="/tags/Spring/" style="font-size: 15px;">Spring</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/c-c/" style="font-size: 10px;">c/c++</a> <a href="/tags/jdbc/" style="font-size: 10px;">jdbc</a> <a href="/tags/leetcode/" style="font-size: 10px;">leetcode</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/xml/" style="font-size: 10px;">xml</a> <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" style="font-size: 15px;">二叉树</a> <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="font-size: 10px;">回溯</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 15px;">多线程</a> <a href="/tags/%E5%AD%90%E9%9B%86/" style="font-size: 10px;">子集</a> <a href="/tags/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/" style="font-size: 10px;">快速排序</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 10px;">排序</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">机器学习</a> <a href="/tags/%E6%B8%B8%E6%A0%87/" style="font-size: 10px;">游标</a> <a href="/tags/%E7%BA%BF%E7%A8%8B%E6%B1%A0/" style="font-size: 10px;">线程池</a> <a href="/tags/%E8%A7%A6%E5%8F%91%E5%99%A8/" style="font-size: 10px;">触发器</a> <a href="/tags/%E9%9A%94%E7%A6%BB/" style="font-size: 10px;">隔离</a> <a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 10px;">集合</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 10px;">面试</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">August 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">December 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/07/30/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2021/08/17/%E6%90%AD%E5%BB%BASpringCloud%E6%9C%8D%E5%8A%A1/">搭建SpringCloud服务</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/14/PL-SQL%E8%A7%A6%E5%8F%91%E5%99%A8/">PL/SQL触发器</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/14/PL-SQL%E6%B8%B8%E6%A0%87/">PL/SQL游标</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/14/PL-SQL%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">PL/SQL基础</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
